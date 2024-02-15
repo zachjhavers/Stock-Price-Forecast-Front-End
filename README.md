@@ -13,33 +13,33 @@ Before you begin, ensure you have the following installed on your machine:
 
 1. **Clone the Repository:**
 
-git clone https://github.com/zachjhavers/Stock-Price-Forecast-Front-End/
+  git clone https://github.com/zachjhavers/Stock-Price-Forecast-Front-End/
 
 2. **Navigate to the Server Folder:**
 
-cd Stock-Price-Forecast-Front-End/server
+  cd Stock-Price-Forecast-Front-End/server
 
 3. **Install Server Dependencies:**
 
-npm install
+  npm install
 
 4. **Run the Server:**
 
-node server.js
+  node server.js
 
-The server should now be running on http://localhost:4000.
+  The server should now be running on http://localhost:4000.
 
 5. **Navigate to the Client Folder:**
 
-cd ../client
+  cd ../client
 
 6. **Install Client Dependencies:**
 
-npm install
+  npm install
 
 7. **Start the Client:**
 
-npm start
+  npm start
 
 
 The client should now be running on http://localhost:3000.
