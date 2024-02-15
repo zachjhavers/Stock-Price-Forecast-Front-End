@@ -1,24 +1,40 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const port = process.env.PORT;
+const { MONGO_URI, PORT } = process.env;
 
-app.use(cors());
+const app = express();
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected");
+
+    app.listen(PORT, () => {
+      console.log(`Server online port ||  ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB database");
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+app.use(require("./Routes/AuthRoute"));
